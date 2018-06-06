@@ -23,7 +23,7 @@ public class ShortUrlService {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
-    ShortUrlRepository repository;
+    private ShortUrlRepository repository;
 
     private UrlShortner shortner;
 
@@ -85,11 +85,10 @@ public class ShortUrlService {
         logger.info("Origin url is {}",origin);
 
 
-
         FutureWithTimer<String> f = urlMap.get(origin);
         if(f == null){
-            FutureTask ft = new FutureTask(() -> findKeyAndInsert(origin));
-            FutureWithTimer ftt = new FutureWithTimer(ft);
+            FutureTask<String> ft = new FutureTask<>(() -> findKeyAndInsert(origin));
+            FutureWithTimer<String> ftt = new FutureWithTimer<>(ft);
             f = urlMap.putIfAbsent(origin,ftt) ;
             if(f == null) {
                 f = ftt;
@@ -116,8 +115,8 @@ public class ShortUrlService {
     }
 
     static class FutureWithTimer<T>{
-        Future<T> future;
-        Date time;
+        private Future<T> future;
+        private Date time;
 
         public FutureWithTimer(Future<T> future) {
             this.future = future;
@@ -133,7 +132,7 @@ public class ShortUrlService {
         }
 
         public boolean isExpired(Date now) {
-            return time.getTime() < (now.getTime() - 5 * 1000l);
+            return time.getTime() < (now.getTime() - 5 * 1000L);
         }
     }
 

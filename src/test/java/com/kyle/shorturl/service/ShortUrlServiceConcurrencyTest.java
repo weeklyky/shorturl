@@ -29,16 +29,16 @@ import static org.mockito.BDDMockito.given;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class ShortUrlServiceConcurrencyTest {
-    AtomicInteger c;
+    private AtomicInteger c;
 
-    Blitzer blitzer = new Blitzer(10000,30);
+    private Blitzer blitzer = new Blitzer(10000,30);
     @Before
     public void setUp(){
         c= new AtomicInteger();
     }
 
     @Autowired
-    ShortUrlService service;
+    private ShortUrlService service;
 
     @MockBean
     private ShortUrlRepository mockRepository;
@@ -68,8 +68,6 @@ public class ShortUrlServiceConcurrencyTest {
             } catch (ExecutionException e) {
                 e.printStackTrace();
             }
-            System.out.println(url + " -> " + test);
-
             c.getAndIncrement();
 
         });

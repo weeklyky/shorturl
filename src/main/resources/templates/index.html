@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>URL Shortener</title>
+</head>
+<body>
+    <div th:if="${shortUrl != null}" th:object="${shortUrl}">
+        <p>Your URL <b th:text="*{originUrl}"></b> is shorten to ...</p>
+        <a target="_blank" th:href="${origin} + *{shortKey}" th:text="${origin} + *{shortKey}"></a>
+    </div>
+
+    <div>
+        <h2>Shorten your url</h2>
+
+        <form action= "/shorturl/register" method="POST">
+            <input name="url" placeholder="Paste a link to shorten"/>
+            <input type="submit" value="Shorten"/>
+        </form>
+    </div>
+</body>
+</html>

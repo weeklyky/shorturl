@@ -29,7 +29,7 @@ public class ShortUrlController {
         return "index";
     }
 
-    @RequestMapping("/{key:^[0-9|A-Z|a-z]{6}$}")
+    @RequestMapping("/{key:^[0-9A-Za-z]{6}$}")
     public String redirect(@PathVariable String key) throws NoSuchShortKeyException {
         logger.info("Search for {}", key);
         return "redirect:"+ service.getOriginUrl(key);

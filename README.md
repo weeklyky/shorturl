@@ -66,7 +66,7 @@ gson | 2.8.2
 
 ### 포트 설정
 
-/src/main/resources/appliaction.properties 에서 아래 포트정보를 변경후 실행 바랍니다.
+/src/main/resources/appliaction.properties 에서 아래 포트정보를 가용한 번호로 변경 후 실행 바랍니다.
 
 
 `server.port=8081`
@@ -75,5 +75,10 @@ gson | 2.8.2
 ### 빌드방법
 
 1. `gradle build`
-
 2. `gradle bootRun`
+
+### 실행방법
+
+1. 웹 브라우저에서 http://localhost:8081 (8081은 포트번호) 로 접속
+2. Input에 긴 URL을 입력하고 Shorten 버튼 클릭
+3. Short Url 링크 화면 출력

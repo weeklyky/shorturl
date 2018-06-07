@@ -72,7 +72,7 @@ gson | 2.8.2
 `server.port=8081`
 
 
-### 빌드 및 실행 방법
+### 빌드 및 실행 CLI 명령어
 0. `git clone https://github.com/weeklyky/shorturl.git`
 1. `cd shorturl`
 2. `gradle build`

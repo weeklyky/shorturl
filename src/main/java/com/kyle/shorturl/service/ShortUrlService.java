@@ -27,14 +27,14 @@ public class ShortUrlService {
 
     private UrlShortner shortner;
 
-    private ConcurrentHashMap<String, FutureWithTimer<String>> urlMap;
+    private ConcurrentHashMap<String, FutureWithTimer<String>> genKeyTasks;
 
     private AtomicLong idx;
 
 
     @PostConstruct
     private void initialize(){
-        urlMap = new ConcurrentHashMap<>();
+        genKeyTasks = new ConcurrentHashMap<>();
 
         shortner = new UrlShortner();
 
@@ -50,15 +50,15 @@ public class ShortUrlService {
 
         ScheduledExecutorService service = Executors
                 .newSingleThreadScheduledExecutor();
-        service.scheduleWithFixedDelay(()-> evictUrlMap(), 10, 10, TimeUnit.SECONDS);
+        service.scheduleWithFixedDelay(()-> evictExpiredTasks(), 10, 10, TimeUnit.SECONDS);
 
     }
 
-    private void evictUrlMap(){
+    private void evictExpiredTasks(){
         final Date date = new Date();
-        List<String> victim = urlMap.keySet().stream().filter(v -> urlMap.get(v).isExpired(date)).collect(Collectors.toList());
+        List<String> victim = genKeyTasks.keySet().stream().filter(v -> genKeyTasks.get(v).isExpired(date)).collect(Collectors.toList());
         logger.info("{} are removed",victim.size());
-        victim.forEach(x ->urlMap.remove(x));
+        victim.forEach(x -> genKeyTasks.remove(x));
 
     }
 
@@ -85,11 +85,11 @@ public class ShortUrlService {
         logger.info("Origin url is {}",origin);
 
 
-        FutureWithTimer<String> f = urlMap.get(origin);
+        FutureWithTimer<String> f = genKeyTasks.get(origin);
         if(f == null){
             FutureTask<String> ft = new FutureTask<>(() -> findKeyAndInsert(origin));
             FutureWithTimer<String> ftt = new FutureWithTimer<>(ft);
-            f = urlMap.putIfAbsent(origin,ftt) ;
+            f = genKeyTasks.putIfAbsent(origin,ftt) ;
             if(f == null) {
                 f = ftt;
                 ft.run();
@@ -127,12 +127,8 @@ public class ShortUrlService {
             return future;
         }
 
-        public Date getTime() {
-            return time;
-        }
-
         public boolean isExpired(Date now) {
-            return time.getTime() < (now.getTime() - 5 * 1000L);
+            return time.getTime() < (now.getTime() - 5000L);
         }
     }
 

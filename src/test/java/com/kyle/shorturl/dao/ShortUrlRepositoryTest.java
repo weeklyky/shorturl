@@ -39,9 +39,9 @@ public class ShortUrlRepositoryTest {
 
     @Test
     public void findMaxId() throws Exception {
-        repository.save(new ShortUrl("0","http://www.naver.com"));
-        repository.save(new ShortUrl("ABCDEFG","http://www.naver.com"));
-        repository.save(new ShortUrl("ABCDEFZ","http://www.naver.com"));
+        repository.save(new ShortUrl("0","http://www.kakaopay.co.kr"));
+        repository.save(new ShortUrl("ABCDEFG","http://www.kakaopay.co.kr"));
+        repository.save(new ShortUrl("ABCDEFZ","http://www.kakaopay.co.kr"));
 
 
         String maxId = repository.findMaxId();
@@ -49,9 +49,9 @@ public class ShortUrlRepositoryTest {
     }
     @Test
     public void findByURLTest() {
-        repository.save(new ShortUrl("ABCDEFG","http://www.naver.com"));
+        repository.save(new ShortUrl("ABCDEFG","http://www.kakaopay.co.kr"));
         ShortUrl url = repository.findByShortKey("ABCDEFG");
-        assertEquals(url.getOriginUrl(),"http://www.naver.com");
+        assertEquals(url.getOriginUrl(),"http://www.kakaopay.co.kr");
 
     }
 

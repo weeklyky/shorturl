@@ -2,6 +2,7 @@ package com.kyle.shorturl.service;
 
 import com.kyle.shorturl.dao.ShortUrl;
 import com.kyle.shorturl.dao.ShortUrlRepository;
+import com.kyle.shorturl.util.UrlShortner;
 import org.jmock.lib.concurrent.Blitzer;
 import org.junit.After;
 import org.junit.Before;
@@ -59,7 +60,7 @@ public class ShortUrlServiceConcurrencyTest {
         blitzer.blitz(() -> {
             //String url  = rand.nextBoolean() ? "http://www.daum.net" : "http://kakao.com";
 
-            String url  = "www."+rand.nextInt(100000)+".com";
+            String url  = "www."+rand.nextInt(100)+".com";
             String test = null;
             try {
                 test = service.registerUrl(url).get();
@@ -72,6 +73,10 @@ public class ShortUrlServiceConcurrencyTest {
 
         });
 
+        String url  = "www.101.com";
+        String test = service.registerUrl(url).get();
+
+        assertEquals(101L, new UrlShortner().decode(test));
         sw.stop();
         System.out.println("execute time : " + sw.getTotalTimeSeconds());
         System.out.println("execute count : " + c.get());

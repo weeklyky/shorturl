@@ -34,11 +34,11 @@ public class ShortUrlControllerTest {
 
     @Test
     public void redirectRegisteredUrl() throws Exception {
-        given(service.getOriginUrl("ABCDEF")).willReturn("http://naver.com");
+        given(service.getOriginUrl("ABCDEF")).willReturn("http://kakaopay.co.kr");
 
         mvc.perform(get("/ABCDEF"))
                 .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("http://naver.com"));
+                .andExpect(redirectedUrl("http://kakaopay.co.kr"));
     }
 
 
@@ -52,13 +52,13 @@ public class ShortUrlControllerTest {
 
     @Test
     public void registerUrl() throws Exception {
-        given(service.registerUrl(eq("http://naver.com"))).willReturn(new AsyncResult<String>("ABCDEF"));
+        given(service.registerUrl(eq("http://kakaopay.co.kr"))).willReturn(new AsyncResult<String>("ABCDEF"));
 
         JsonObject expectResult = new JsonObject();
-        expectResult.addProperty("originUrl", "http://naver.com");
+        expectResult.addProperty("originUrl", "http://kakaopay.co.kr");
         expectResult.addProperty("shortKey", "ABCDEF");
 
-        mvc.perform(post("/shorturl/register").param("url","http://naver.com"))
+        mvc.perform(post("/shorturl/register").param("url","http://kakaopay.co.kr"))
                 .andExpect(status().isOk());
     }
 

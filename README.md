@@ -2,7 +2,7 @@
 
 ## 프로젝트 소개
 URL Shortening Service
-URL을 입력받아 5자리의 짧은 문자열을 발급하고, 발급받은 문자열을 서버에 요청시 원래 URL로 리다이렉트해 주는 서비스
+URL을 입력받아 6자리의 짧은 문자열을 발급하고, 발급받은 문자열을 서버에 요청시 원래 URL로 리다이렉트해 주는 서비스
 
 http://35.234.43.247/ (Temporary)
 
@@ -47,7 +47,7 @@ mvcMock과 Mockito 사용.
 
 
 ### Dependencies
-Dependence         |Version
+
 -------------------|-------
 spring-boot       |1.5.10.RELEASE 
 spring-boot-starter-web |

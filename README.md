@@ -47,7 +47,7 @@ mvcMock과 Mockito 사용.
 
 
 ### Dependencies
-
+Dependencies       |Version
 -------------------|-------
 spring-boot       |1.5.10.RELEASE 
 spring-boot-starter-web |

@@ -72,13 +72,13 @@ gson | 2.8.2
 `server.port=8081`
 
 
-### 빌드방법
+### 빌드 및 실행 방법
+0. `git clone https://github.com/weeklyky/shorturl.git`
+1. `cd shorturl`
+2. `gradle build`
+3. `gradle bootRun`
 
-1. `gradle build`
-2. `gradle bootRun`
-
-### 실행방법
-
+### 사용법 
 1. 웹 브라우저에서 http://localhost:8081 (8081은 포트번호) 로 접속
 2. Input에 긴 URL을 입력하고 Shorten 버튼 클릭
 3. Short Url 링크 화면 출력

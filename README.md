@@ -6,6 +6,8 @@ URL을 입력받아 6자리의 짧은 문자열을 발급하고, 발급받은 �
 
 http://35.234.43.247/ (Temporary)
 
+http://map.daum.net/?srcid=17713941&confirmid=17713941&q=H -> http://35.234.43.247/000006
+
 
 ## 문제해결 전략
 ### Short Url 키 생성 알고리즘
